@@ -3,16 +3,12 @@ import GUNS from '../data/guns.js'
 import GunCard from '../components/GunCard.jsx'
 
 function Catalog() {
-  // State untuk menyimpan event instalasi dari browser
   const [deferredPrompt, setDeferredPrompt] = useState(null)
-  const [isInstallable, setIsInstallable] = useState(false)
 
   useEffect(() => {
-    // Fungsi untuk menangkap event 'beforeinstallprompt'
     const handleBeforeInstallPrompt = (e) => {
-      e.preventDefault() // Mencegah browser memunculkan prompt otomatis bawaannya
-      setDeferredPrompt(e) // Menyimpan event untuk dipicu nanti lewat tombol
-      setIsInstallable(true) // Memunculkan tombol Install di UI
+      e.preventDefault() 
+      setDeferredPrompt(e) 
     }
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
@@ -23,8 +19,9 @@ function Catalog() {
   }, [])
 
   const handleInstallClick = async () => {
+    // Jika event PWA siap (biasanya di Vercel/Production)
     if (deferredPrompt) {
-      deferredPrompt.prompt() // Memunculkan popup instalasi PWA
+      deferredPrompt.prompt()
       const { outcome } = await deferredPrompt.userChoice
       
       if (outcome === 'accepted') {
@@ -33,9 +30,11 @@ function Catalog() {
         console.log('User menolak instalasi')
       }
       
-      // Reset state setelah prompt digunakan
       setDeferredPrompt(null)
-      setIsInstallable(false)
+    } 
+    // Jika diklik di localhost / event belum siap
+    else {
+      alert("Tombol install PWA aktif. (Catatan: Proses instalasi asli hanya akan muncul ketika diakses melalui Vercel/HTTPS).")
     }
   }
 
@@ -48,24 +47,22 @@ function Catalog() {
           type, caliber, and price — nothing else.
         </p>
         
-        {/* Tombol Install App yang hanya muncul jika PWA siap diinstal */}
-        {isInstallable && (
-          <button 
-            onClick={handleInstallClick} 
-            style={{
-              marginTop: '15px',
-              padding: '10px 20px',
-              backgroundColor: '#333',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
-            }}
-          >
-            ⬇️ Install App
-          </button>
-        )}
+        {/* Tombol dimunculkan secara permanen tanpa syarat isInstallable */}
+        <button 
+          onClick={handleInstallClick} 
+          style={{
+            marginTop: '15px',
+            padding: '10px 20px',
+            backgroundColor: '#333',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          ⬇️ Install App
+        </button>
       </section>
 
       <section>
