@@ -12,7 +12,13 @@ function GunCard({ gun }) {
           alt="" 
           width="120" 
           height="90" 
-          style={{ objectFit: 'contain' }} 
+          style={{ 
+            width: '100%', 
+            height: '160px', 
+            objectFit: 'contain', 
+            backgroundColor: '#e6e9ec', 
+            padding: '15px' 
+          }} 
         />
         <span className="name display">{gun.name}</span>
         <span className="type">
@@ -32,7 +38,13 @@ function GunCard({ gun }) {
           alt="" 
           width="240" 
           height="180" 
-          style={{ objectFit: 'contain' }} 
+          style={{ 
+            width: '100%', 
+            height: '250px', 
+            objectFit: 'contain', 
+            backgroundColor: '#e6e9ec', 
+            padding: '20px' 
+          }} 
         />
         <h3 className="display">{gun.name}</h3>
         <p className="type">
