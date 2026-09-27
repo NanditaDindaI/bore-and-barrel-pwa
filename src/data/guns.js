@@ -67,7 +67,7 @@ const GUNS = [
     type: 'Shotgun',
     caliber: '12 Gauge',
     price: 1899,
-    image: '/guns/benelli-m4.webp',
+    image: '/guns/benelli.png',
     description:
       'Gas-operated semi-automatic combat shotgun. Featuring the Auto-Regulating Gas Operated (A.R.G.O.) system. Fast, brutal, and utterly reliable in any environment.',
   },
@@ -76,7 +76,7 @@ const GUNS = [
     type: 'Submachine Gun',
     caliber: '5.7x28mm',
     price: 1499,
-    image: '/guns/p90.jpg',
+    image: '/guns/p90.png',
     description:
       'Compact bullpup design with a top-mounted 50-round magazine. Fires high-velocity armor-piercing rounds with virtually no recoil. Weird looking, but highly effective.',
   }
